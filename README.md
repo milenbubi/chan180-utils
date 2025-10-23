@@ -17,7 +17,11 @@ yarn add @ffilip/chan180-utils
 import { isPlainObject } from "@ffilip/chan180-utils/types";
 import { toggleFullScreen } from "@ffilip/chan180-utils/helpers";
 ```
-
+#### Optional global styles
+To include the default styles, import them manually in your app entry:
+```ts
+import "@ffilip/chan180-utils/dist/styles.css";
+```
 ## Features
 
 🧩 Shared TypeScript types and models
