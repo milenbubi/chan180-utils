@@ -1,0 +1,76 @@
+{
+  "name": "@ffilip/chan180-utils",
+  "version": "2.0.1",
+  "description": "Lightweight TypeScript utilities with shared types, models, and browser helpers (like fullscreen and DOM tools).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./numbers": {
+      "import": "./dist/numbers/index.js",
+      "types": "./dist/numbers/index.d.ts"
+    },
+    "./document": {
+      "import": "./dist/document/index.js",
+      "types": "./dist/document/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.js",
+      "types": "./dist/react/index.d.ts"
+    },
+    "./mui": {
+      "import": "./dist/mui/index.js",
+      "types": "./dist/mui/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./styles": {
+      "import": "./dist/styles.css"
+    }
+  },
+  "scripts": {
+    "build": "tsc && sass src/styles/main.scss dist/styles.css --no-source-map"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "typescript",
+    "helpers",
+    "utils",
+    "chan180"
+  ],
+  "author": "Phillip K.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ffilip/chan180-utils.git"
+  },
+  "devDependencies": {
+    "@mui/material": "^5.15.21",
+    "@types/big.js": "^6.2.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "big.js": "^7.0.1",
+    "react": "^18.3.1",
+    "sass": "^1.93.2",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "@mui/material": "^5.15.21",
+    "big.js": "^7.0.1",
+    "react": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
