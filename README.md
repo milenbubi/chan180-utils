@@ -1,6 +1,13 @@
 # @ffilip/chan180-utils
 
-Lightweight TypeScript utilities with shared types, models, and browser helpers (like fullscreen and DOM tools).
+[![npm version](https://img.shields.io/npm/v/@ffilip/chan180-utils.svg)](https://www.npmjs.com/package/@ffilip/chan180-utils)
+[![npm downloads](https://img.shields.io/npm/dt/@ffilip/chan180-utils.svg)](https://www.npmjs.com/package/@ffilip/chan180-utils)
+[![npm downloads](https://img.shields.io/npm/dt/%40ffilip%2Fchan180-utils.svg)](https://www.npmjs.com/package/@ffilip/chan180-utils)
+[![npm downloads](https://img.shields.io/npm/dt/%40ffilip%2Fchan180-utils.svg)](https://www.npmjs.com/package/@ffilip/chan180-utils)
+
+
+
+Lightweight TypeScript utilities with shared tools, react hooks, MUI components  and browser helpers (like fullscreen and DOM tools).
 
 ## Installation
 
