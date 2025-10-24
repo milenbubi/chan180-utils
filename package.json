@@ -51,11 +51,11 @@
   ],
   "author": "Phillip K.",
   "license": "MIT",
+  "homepage": "https://chan180.net",
   "repository": {
     "type": "git",
     "url": "https://github.com/milenbubi/chan180-utilss.git"
   },
-  "homepage": "https://chan180.net/",
   "devDependencies": {
     "@mui/material": "^7.3.2",
     "@types/big.js": "^6.2.2",
