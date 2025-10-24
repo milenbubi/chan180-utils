@@ -1,6 +1,6 @@
 {
   "name": "@ffilip/chan180-utils",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Lightweight TypeScript utilities with shared types, models, and browser helpers (like fullscreen and DOM tools).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
