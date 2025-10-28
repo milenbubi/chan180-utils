@@ -4,7 +4,6 @@ interface IPeriodOptions {
 }
 
 
-
 export enum PeriodLengthInDays {
   AllTime = -1,
   Custom = 0,
