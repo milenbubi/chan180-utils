@@ -1,2 +1,2 @@
-export * from "./BigNumber";
+export * from "./numberFormatters";
 export * from "./isNumeric";

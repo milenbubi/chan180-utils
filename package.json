@@ -1,6 +1,6 @@
 {
   "name": "@ffilip/chan180-utils",
-  "version": "2.0.10",
+  "version": "3.0.0",
   "description": "Lightweight TypeScript utilities with shared types, models, and browser helpers (like fullscreen and DOM tools).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,36 +9,37 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./env": {
+      "import": "./dist/env/index.js",
+      "types": "./dist/env/index.d.ts"
+    },
+    "./helpers": {
+      "import": "./dist/helpers/index.js",
+      "types": "./dist/helpers/index.d.ts"
+    },
     "./numbers": {
       "import": "./dist/numbers/index.js",
       "types": "./dist/numbers/index.d.ts"
     },
-    "./document": {
-      "import": "./dist/document/index.js",
-      "types": "./dist/document/index.d.ts"
-    },
-    "./react": {
-      "import": "./dist/react/index.js",
-      "types": "./dist/react/index.d.ts"
-    },
-    "./mui": {
-      "import": "./dist/mui/index.js",
-      "types": "./dist/mui/index.d.ts"
+    "./time": {
+      "import": "./dist/time/index.js",
+      "types": "./dist/time/index.d.ts"
     },
     "./types": {
       "import": "./dist/types/index.js",
       "types": "./dist/types/index.d.ts"
-    },
-    "./components": {
-      "import": "./dist/components/index.js",
-      "types": "./dist/components/index.d.ts"
     },
     "./styles": {
       "import": "./dist/styles.css"
     }
   },
   "scripts": {
-    "build": "tsc && sass src/styles/main.scss dist/styles.css --no-source-map"
+    "dev": "tsc -w",
+    "build": "rm -rf dist && tsc && sass src/styles/main.scss dist/styles.css --no-source-map",
+    "version:major": "npm version --major && git push --follow-tags",
+    "version:minor": "npm version --minor && git push --follow-tags",
+    "version:patch": "npm version --patch && git push --follow-tags",
+    "manualRelease": "npm run build && npm publish --access public && npm info @ffilip/chan180-utils"
   },
   "files": [
     "dist"
@@ -54,18 +55,15 @@
   "homepage": "https://chan180.net",
   "repository": {
     "type": "git",
-    "url": "https://github.com/milenbubi/chan180-utilss.git"
+    "url": "https://github.com/milenbubi/chan180-utils.git"
+  },
+  "dependencies": {
+    "big.js": "^7.0.1"
   },
   "devDependencies": {
-    "@mui/material": "^7.3.2",
     "@types/big.js": "^6.2.2",
-    "@types/react": "^18.3.3",
     "sass": "^1.93.2",
     "typescript": "^5.9.3"
-  },
-  "peerDependencies": {
-    "big.js": "^7.0.1",
-    "react": ">=18.0.0"
   },
   "publishConfig": {
     "access": "public"

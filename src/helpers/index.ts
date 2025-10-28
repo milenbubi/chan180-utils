@@ -1,3 +1,3 @@
 export * from "./colorUtils";
-export * from "./utils";
-export * from "./lsutils";
+export * from "./sleep";
+export * from "./localStorage";

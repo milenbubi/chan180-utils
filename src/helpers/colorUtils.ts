@@ -1,8 +1,3 @@
-import { useMemo } from "react";
-import { colors } from "@mui/material";
-import { blue, grey } from "@mui/material/colors";
-import { useIsThemeDark } from "../mui/mui";
-
 const _hexRegex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i;
 
 
@@ -28,34 +23,6 @@ export function hexToRgba(hex: string, alpha: number = 1): string | null {
 }
 
 
-type IChan180Colors = {
-  greenC: string;
-  redC: string;
-  yellowC: string;
-  isDark: boolean;
-  blueC: string;
-  labelC: string;
-  borderC: string;
-};
-
-
-export function useChan180Colors() {
-  const {isThemeDark}= useIsThemeDark();
-
-  const trColors = useMemo<IChan180Colors>(
-    () => ({
-      greenC: colors.green[isThemeDark ? 400 : 900],
-      redC: colors.red[isThemeDark ? 300 : 800],
-      yellowC: colors.yellow[isThemeDark ? 300 : 900],
-      blueC: blue[isThemeDark ? 400 : 900],
-      isDark: isThemeDark,
-      labelC: isThemeDark ? "#f3fb97" : "#335a53",
-      borderC: isThemeDark ? grey[500] : grey[500]
-    }), [isThemeDark]
-  );
-
-  return trColors;
-}
 
 const pastelColors = [
   "#3990f2",
@@ -79,21 +46,48 @@ const pastelColors = [
   "#95b8d1",
   "#f0efeb",
   "#fb6f92"
-];
+] as const;
 
 
-export function getRandomPastelColor() {
-  return pastelColors[Math.floor(Math.random() * pastelColors.length)];
-}
+// Generates a union 0..N (inclusive) using tuples only
+type UpTo<N extends number, T extends number[] = []> =
+  T["length"] extends N
+  ? [...T, N][number]         // 0..N
+  : UpTo<N, [...T, T["length"]]>;
+
+// Valid range: 1..length (exclude 0)
+type ValidCount = Exclude<UpTo<typeof pastelColors["length"]>, 0>;
+// result: 1 | 2 | 3 | ... | N 
 
 
-export function getTwoRandomPastelColors() {
-  const firstColor = getRandomPastelColor();
-  let secondColor = getRandomPastelColor();
+/**
+ * Returns one or more unique random pastel colors.
+ *
+ * The number of colors to return is specified by `count`.
+ * `count` must be between 1 and the total number of available colors (inclusive).
+ *
+ * @param count - Number of unique colors to return (1..palette length).
+ * @returns {C extends 1 ? string : string[]} A single color if `count` is 1, otherwise an array of colors.
+ *
+ * @example
+ * getRandomPastelColors(1);
+ * // => "#feda2d"
+ *
+ * getRandomPastelColors(3);
+ * // => ["#ffa8bb", "#1CB54E", "#95b8d1"]
+ */
+export function getRandomPastelColors<C extends ValidCount>(
+  count: C
+): C extends 1 ? string : string[] {
+  const colors = [...pastelColors];
+  const result: string[] = [];
 
-  while (secondColor === firstColor) {
-    secondColor = getRandomPastelColor();
+  for (let i = 0; i < count && colors.length > 0; i++) {
+    const index = Math.floor(Math.random() * colors.length);
+    result.push(colors.splice(index, 1)[0]);
   }
 
-  return { firstColor, secondColor };
+  // TypeScript’s type inference doesn’t perfectly handle this conditional return type,
+  // so we manually cast it to ensure the return type matches (string | string[]).
+  return (count === 1 ? result[0] : result) as C extends 1 ? string : string[];
 }

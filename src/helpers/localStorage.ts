@@ -40,18 +40,19 @@ let initialized = false;
  *
  * @template {string} K The list of keys that will be available in LocalStorage.
  * @param {readonly K[]} keys - Array of allowed keys (string literals).
- * @returns {{
- *   set: (key: K, data: any, shouldStringifyData?: boolean) => void,
- *   get: (key: K) => string,
- *   getParsed: <T = any>(key: K) => T | null,
- *   remove: (key: K) => void
- * }} LocalStorage helper instance.
+ * @returns LocalStorage helper instance with methods:
+ * - `set(key, data, stringify?)`
+ * - `get(key)`
+ * - `getParsed<T>(key)`
+ * - `remove(key)`
+ * - `clearAll()`
  */
 export function createLocalStorageHelper<const K extends string>(keys: readonly K[]): {
   set: (key: K, data: any, shouldStringifyData?: boolean) => void;
-  get: (key: K) => string;
+  get: (key: K) => string | null;
   getParsed: <T = any>(key: K) => T | null;
   remove: (key: K) => void;
+  clearAll: VoidFunction;
 } {
   if (initialized) {
     throw new Error("[LS] LocalStorageHelper already initialized!");
@@ -73,7 +74,7 @@ export function createLocalStorageHelper<const K extends string>(keys: readonly 
 
 
   const get = (key: LocalStorageKeys) => {
-    return localStorage.getItem(key) || "";
+    return localStorage.getItem(key);
   };
 
 
@@ -93,5 +94,10 @@ export function createLocalStorageHelper<const K extends string>(keys: readonly 
   };
 
 
-  return { set, get, getParsed, remove };
+  const clearAll = () => {
+    keys.forEach(k => localStorage.removeItem(k));
+  };
+
+
+  return { set, get, getParsed, remove, clearAll };
 }
