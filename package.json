@@ -36,8 +36,8 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "rm -rf dist && tsc && sass src/styles/main.scss dist/styles.css --no-source-map",
-    "version:major": "npm version --major && git push --follow-tags",
-    "version:minor": "npm version --minor && git push --follow-tags",
+    "version:major": "npm version major && git push --follow-tags",
+    "version:minor": "npm version minor && git push --follow-tags",
     "version:patch": "npm version patch && git push --follow-tags",
     "manualRelease": "rm -rf dist && npm run build && npm publish --access public && npm info @ffilip/chan180-utils"
   },
