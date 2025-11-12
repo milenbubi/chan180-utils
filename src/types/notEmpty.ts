@@ -1,4 +1,17 @@
-type NullOrUndefined = null | undefined;
+/**
+ * Represents a value that is either `null` or `undefined`.
+ *
+ * Useful for describing optional-like cases or composing
+ * union types that explicitly include both `null` and `undefined`.
+ *
+ * @example
+ * type MaybeString = string | NullOrUndefined;
+ * // → string | null | undefined
+ *
+ * @example
+ * const value: NullOrUndefined = Math.random() > 0.5 ? null : undefined;
+ */
+export type NullOrUndefined = null | undefined;
 
 
 /**
