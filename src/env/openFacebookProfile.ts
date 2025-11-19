@@ -14,7 +14,7 @@ import { isMobile } from "./platform";
  * - On mobile: attempts to open the Facebook app using a deep link (`fb://profile/{id}`).
  * - If the Facebook app does not open within ~1.5 seconds, falls back to the web URL.
  *
- * @param {number} fbUserId - The numeric Facebook user/profile ID.
+ * @param {number|string} fbUserId - The Facebook user/profile ID (numeric or numeric string).
  * @returns {void}
  *
  * @example
@@ -24,7 +24,7 @@ import { isMobile } from "./platform";
  * The fallback timer uses a 1500 ms delay and checks whether the app launch
  * interrupted the flow. If not, it opens the profile in the browser.
  */
-export function openFacebookProfile(fbUserId: number): void {
+export function openFacebookProfile(fbUserId: number | string): void {
   if (!isNumeric(fbUserId, { isInteger: true, notNegative: true })) {
     return;
   }
