@@ -1,4 +1,5 @@
 import { safeJsonParse } from "./safeJsonParse";
+import { safeJsonStringify } from "./safeJsonStringify";
 
 
 
@@ -84,11 +85,21 @@ export function createSafeTypedLocalStorage<const K extends string>(keys: readon
      * @param {boolean} [shouldStringifyData=false] Whether to JSON-stringify the value.
      */
     set(key: LocalStorageKeys, data: any, shouldStringifyData: boolean = false) {
+      const value = shouldStringifyData
+        ? safeJsonStringify(data)
+        : (typeof data === "string" ? data : (data != null ? String(data) : null));
+
+      /**
+       * Using loose equality (`==`) intentionally:
+       * - `value == null` matches both `null` and `undefined`
+       * - We do not want to store either of those in LocalStorage
+       */
+      if (value == null) {
+        return;
+      }
+
       try {
-        localStorage.setItem(
-          key,
-          shouldStringifyData ? JSON.stringify(data) : data
-        );
+        localStorage.setItem(key, value);
       }
       catch { }
     },
@@ -114,8 +125,16 @@ export function createSafeTypedLocalStorage<const K extends string>(keys: readon
      * @returns {T|null} Parsed object or `null` if unavailable or invalid JSON.
      */
     getParsed<T = any>(key: LocalStorageKeys): T | null {
-      const data = localStorage.getItem(key);
-      return safeJsonParse<T>(data);
+      let raw: string | null;
+
+      try {
+        raw = localStorage.getItem(key);
+      }
+      catch {
+        return null;
+      }
+
+      return safeJsonParse<T>(raw);
     },
 
     /**

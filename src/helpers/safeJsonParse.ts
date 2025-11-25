@@ -18,7 +18,7 @@
  * const invalid = safeJsonParse("{not-json}");
  * // → null
  */
-export function safeJsonParse<T = any>(input: any): T | null {
+export function safeJsonParse<T = any>(input: string | null): T | null {
   if (input == null || input === "" || typeof input !== "string") {
     return null;
   }
