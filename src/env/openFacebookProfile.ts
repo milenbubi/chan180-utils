@@ -9,6 +9,7 @@ import { isMobile } from "./platform";
  * or in a new browser tab on desktop.
  *
  * Behavior:
+ * - Accepts the Facebook profile ID as a number or a numeric string.
  * - Validates that the provided `fbUserId` is a non-negative integer.
  * - On desktop: opens `https://www.facebook.com/{id}` in a new tab.
  * - On mobile: attempts to open the Facebook app using a deep link (`fb://profile/{id}`).
@@ -19,7 +20,8 @@ import { isMobile } from "./platform";
  *
  * @example
  * openFacebookProfile(123456789);
- *
+ * openFacebookProfile("987654321");
+ * 
  * @remarks
  * The fallback timer uses a 1500 ms delay and checks whether the app launch
  * interrupted the flow. If not, it opens the profile in the browser.

@@ -1,3 +1,7 @@
+import { safeJsonParse } from "./safeJsonParse";
+
+
+
 /**
  * A lightweight, fail-safe wrapper around the browser's `localStorage` API.
  *
@@ -47,13 +51,8 @@ export const safeLocalStorage = {
    * @returns {T|null} Parsed object or `null` if unavailable or invalid JSON.
    */
   getParsed<T = any>(key: string): T | null {
-    try {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : null;
-    }
-    catch {
-      return null;
-    }
+    const data = localStorage.getItem(key);
+    return safeJsonParse<T>(data);
   },
 
   /**

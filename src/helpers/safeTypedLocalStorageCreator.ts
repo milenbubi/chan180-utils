@@ -1,3 +1,7 @@
+import { safeJsonParse } from "./safeJsonParse";
+
+
+
 /**
  * Internal flag used to ensure the LocalStorage helper
  * is initialized **only once** per application runtime.
@@ -110,13 +114,8 @@ export function createSafeTypedLocalStorage<const K extends string>(keys: readon
      * @returns {T|null} Parsed object or `null` if unavailable or invalid JSON.
      */
     getParsed<T = any>(key: LocalStorageKeys): T | null {
-      try {
-        const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : null;
-      }
-      catch {
-        return null;
-      }
+      const data = localStorage.getItem(key);
+      return safeJsonParse<T>(data);
     },
 
     /**
