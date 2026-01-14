@@ -111,15 +111,15 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
  * @returns {string | null} UTC ISO string with time set to 00:00, or null if input is invalid.
  *
  * @example
- * getUTCZeroTime(new Date("2025-10-15T14:30:00")); 
+ * getUTCStartOfLocalDay(new Date("2025-10-15T14:30:00")); 
  * // "2025-10-15T00:00:00.000Z"
  *
  * @example
  * // User in New York enters 2025-10-14T23:01 local time
- * getUTCZeroTime(new Date("2025-10-14T23:01:00")); 
+ * getUTCStartOfLocalDay(new Date("2025-10-14T23:01:00")); 
  * // "2025-10-14T00:00:00.000Z"
  */
-export function getUTCZeroTime(source: DateSource): string | null {
+export function getUTCStartOfLocalDay(source: DateSource): string | null {
   const date = parseValidDate(source);
 
   if (!date) {
@@ -129,7 +129,8 @@ export function getUTCZeroTime(source: DateSource): string | null {
   const utcDate = new Date(Date.UTC(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate()
+    date.getDate(),
+    0, 0, 0, 0
   ));
 
   return utcDate.toISOString();
@@ -145,7 +146,7 @@ export function getUTCZeroTime(source: DateSource): string | null {
  * @returns {string | null} The formatted ISO 8601 date string (e.g. "2021-01-18T10:57:30.268Z"),
  *                               or `null` if the input could not be parsed.
  *
- * Converts the input into an ISO 8601 string using `toJSON()`, which always outputs UTC time.
+ * Converts the input into an ISO 8601 string using `toISOString()`, which always outputs UTC time.
  * 
  * @example
  * getLocalToUTCString(new Date("2025-10-15T14:30:00"));
@@ -161,5 +162,5 @@ export function getUTCZeroTime(source: DateSource): string | null {
  */
 export function getLocalToUTCString(source: DateSource): string | null {
   const localDate = parseValidDate(source);
-  return localDate?.toJSON() || null;
+  return localDate?.toISOString() || null;
 }
