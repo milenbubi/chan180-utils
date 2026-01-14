@@ -37,6 +37,7 @@ export function calculatePeriodBoundaries(fixedPeriod: PeriodLengthInDays): IPer
   if (
     [
       PeriodLengthInDays.One,
+      PeriodLengthInDays.Three,
       PeriodLengthInDays.Seven,
       PeriodLengthInDays.Thirty,
       PeriodLengthInDays.ThreeMonths,

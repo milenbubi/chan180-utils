@@ -8,6 +8,7 @@ export enum PeriodLengthInDays {
   AllTime = -1,
   Custom = 0,
   One = 1,
+  Three = 3,
   Seven = 7,
   Thirty = 30,
   ThisWeek = 77,
@@ -21,6 +22,7 @@ export const getPeriodOptions = (excludePeriods: PeriodLengthInDays[] = []) => {
   const options: IPeriodOptions[] = [
     { text: "Today", value: PeriodLengthInDays.Today },
     { text: "Last 24 hours", value: PeriodLengthInDays.One },
+    { text: "Last 3 days", value: PeriodLengthInDays.Three },
     { text: "This Week", value: PeriodLengthInDays.ThisWeek },
     { text: "Last 7 Days", value: PeriodLengthInDays.Seven },
     { text: "This Month", value: PeriodLengthInDays.ThisMonth },
