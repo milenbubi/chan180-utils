@@ -1,4 +1,4 @@
-interface IPeriodOptions {
+export interface IPeriodOptions {
   text: string;
   value: PeriodLengthInDays;
 }
