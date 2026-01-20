@@ -25,7 +25,7 @@ export function hexToRgba(hex: string, alpha: number = 1): string | null {
 
 
 const pastelColors = [
-  "#3990f2",
+  "#0088fe",
   "#2fc4c6",
   "#ffa8bb",
   "#b040cc",
@@ -40,12 +40,15 @@ const pastelColors = [
   "#679b9b",
   "#f1935c",
   "#a7e9af",
-  "#1CB54E",
+  "#1cb54e",
+  "#00c49f",
   "#851372",
   "#ffee93",
   "#95b8d1",
   "#f0efeb",
-  "#fb6f92"
+  "#fb6f92",
+  "#ffbb28",
+  "#ff8042"
 ] as const;
 
 
@@ -66,7 +69,7 @@ type ValidCount = Exclude<UpTo<typeof pastelColors["length"]>, 0>;
  * The number of colors to return is specified by `count`.
  * `count` must be between 1 and the total number of available colors (inclusive).
  *
- * @param count - Number of unique colors to return (1..palette length).
+ * @param count - Number of unique colors to return (1 ... 24).
  * @returns {C extends 1 ? string : string[]} A single color if `count` is 1, otherwise an array of colors.
  *
  * @example
