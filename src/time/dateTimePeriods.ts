@@ -11,6 +11,7 @@ export enum PeriodLengthInDays {
   Three = 3,
   Seven = 7,
   Thirty = 30,
+  Fifty = 50,
   ThisWeek = 77,
   ThisMonth = 33,
   ThreeMonths = 90,
@@ -27,6 +28,7 @@ export const getPeriodOptions = (excludePeriods: PeriodLengthInDays[] = []) => {
     { text: "Last 7 Days", value: PeriodLengthInDays.Seven },
     { text: "This Month", value: PeriodLengthInDays.ThisMonth },
     { text: "Last 30 Days", value: PeriodLengthInDays.Thirty },
+    { text: "Last 50 Days", value: PeriodLengthInDays.Fifty },
     { text: "Last 3 Months", value: PeriodLengthInDays.ThreeMonths },
     { text: "All Time", value: PeriodLengthInDays.AllTime },
     { text: "Custom", value: PeriodLengthInDays.Custom }

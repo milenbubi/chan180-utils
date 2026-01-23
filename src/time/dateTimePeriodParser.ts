@@ -40,6 +40,7 @@ export function calculatePeriodBoundaries(fixedPeriod: PeriodLengthInDays): IPer
       PeriodLengthInDays.Three,
       PeriodLengthInDays.Seven,
       PeriodLengthInDays.Thirty,
+      PeriodLengthInDays.Fifty,
       PeriodLengthInDays.ThreeMonths,
     ].includes(fixedPeriod)
   ) {
