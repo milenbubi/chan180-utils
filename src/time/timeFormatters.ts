@@ -59,7 +59,8 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
         year: "numeric",
         month: "short",
         day: "numeric",
-        hour12: false,
+        // hour12: false,
+        hourCycle: "h23",
         hour: "2-digit",
         minute: "2-digit",
         second: noSeconds ? undefined : "2-digit"
@@ -84,7 +85,8 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
 
     case "hoursMinutesSeconds":
       dateLocaleOptions = {
-        hour12: false,
+        // hour12: false,
+        hourCycle: "h23",
         hour: "2-digit",
         minute: "2-digit",
         second: noSeconds ? undefined : "2-digit"
@@ -96,6 +98,8 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
       break;
   }
 
+  // 69512992
+  // show 00:00 instead of 24:00 
   return date.toLocaleString(locale, dateLocaleOptions);
 }
 
