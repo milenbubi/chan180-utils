@@ -1,6 +1,6 @@
 {
   "name": "@ffilip/chan180-utils",
-  "version": "3.4.7",
+  "version": "3.4.8",
   "description": "Lightweight TypeScript utilities with shared types, models, and browser helpers (like fullscreen and DOM tools).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,6 +16,10 @@
     "./helpers": {
       "import": "./dist/helpers/index.js",
       "types": "./dist/helpers/index.d.ts"
+    },
+    "./colors": {
+      "import": "./dist/colors/index.js",
+      "types": "./dist/colors/index.d.ts"
     },
     "./numbers": {
       "import": "./dist/numbers/index.js",
