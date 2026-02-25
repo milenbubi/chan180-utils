@@ -28,6 +28,13 @@ export function parseValidDate(value: DateSource): Date | null {
   return isNaN(date.getTime()) ? null : date;
 }
 
+interface IFormatUtcDateProps {
+  source: DateSource;
+  unit: DateFormatUnit;
+  locale?: string;
+  noSeconds?: boolean;
+  returnEmptyInsteadOfNA?: boolean;
+}
 
 
 /**
@@ -48,7 +55,7 @@ export function parseValidDate(value: DateSource): Date | null {
  * @param returnEmptyInsteadOfNA - Optional flag. If `true`, returns an empty string `""` instead of `"N/A"` when the source is invalid or null.
  * @returns {string} - The formatted local date/time string. Returns `"N/A"` if the source is invalid or null.
  */
-export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFormatUnit, locale: string, noSeconds?: boolean, returnEmptyInsteadOfNA?: boolean): string {
+export function formatUTCDateToLocalDateString({ source, unit, locale = "en", noSeconds, returnEmptyInsteadOfNA }: IFormatUtcDateProps): string {
   const date = parseValidDate(source);
   if (!date) {
     return returnEmptyInsteadOfNA ? "" : "N/A";
