@@ -1,5 +1,5 @@
-type DateSource = Date | string | number | null;
-type DateFormatUnit = "fullDateTime" | "date" | "year" | "yearMonth" | "monthDay" | "hoursMinutesSeconds";
+export type DateSource = Date | string | number | null;
+type DateFormatUnit = "fullDateTime" | "date" | "year" | "yearMonth" | "monthDay" | "hoursMinutesSeconds" | "camStyle";
 
 
 
@@ -35,20 +35,23 @@ export function parseValidDate(value: DateSource): Date | null {
  *
  * @param source - The source date. Can be a Date object, a date string, a Unix timestamp (milliseconds since Epoch), or null.
  * @param unit - The output format unit. Controls how detailed the formatted string will be:
- *    - `"fullDateTime"` → includes date and time (e.g. "14 Oct 2025, 16:32:10")
- *    - `"date"` → year, short month, and day
- *    - `"year"` → year only
- *    - `"yearMonth"` → full month name and year
- *    - `"monthDay"` → full month name and day only
- *    - `"hoursMinutesSeconds"` → time only
+ *    - *NOTE: All examples below use locale "en"*
+ *    - `"fullDateTime"` → includes date and time: **25 Feb 2026, 16:32:10**
+ *    - `"date"` → year, short month, and day: **25 Feb 2026**
+ *    - `"year"` → year only: **2026**
+ *    - `"yearMonth"` → full month name and year: **February 2026**
+ *    - `"monthDay"` → full month name and day only: **February 25**
+ *    - `"hoursMinutesSeconds"` → time only: **16:32:10**
+ *    - `"camStyle"` → Styles for cameras: **25-02-2026 16:24:39**
  * @param locale - The target locale (e.g. `"en-US"`, `"bg-BG"`). Determines language and formatting rules.
  * @param noSeconds - Optional flag to omit seconds in time-based formats.
+ * @param returnEmptyInsteadOfNA - Optional flag. If `true`, returns an empty string `""` instead of `"N/A"` when the source is invalid or null.
  * @returns {string} - The formatted local date/time string. Returns `"N/A"` if the source is invalid or null.
  */
-export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFormatUnit, locale: string, noSeconds?: boolean): string {
+export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFormatUnit, locale: string, noSeconds?: boolean, returnEmptyInsteadOfNA?: boolean): string {
   const date = parseValidDate(source);
   if (!date) {
-    return "N/A";
+    return returnEmptyInsteadOfNA ? "" : "N/A";
   }
 
   let dateLocaleOptions: Intl.DateTimeFormatOptions;
@@ -92,6 +95,18 @@ export function formatUTCDateToLocalDateString(source: DateSource, unit: DateFor
         second: noSeconds ? undefined : "2-digit"
       };
       break;
+
+    case "camStyle": {
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // месеците са 0-based month
+      const year = date.getFullYear();
+
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const seconds = String(date.getSeconds()).padStart(2, "0");
+
+      return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    }
 
     default:  // fallback to long date
       dateLocaleOptions = { year: "numeric", month: "long", day: "numeric" };
