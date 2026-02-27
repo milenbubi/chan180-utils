@@ -1,6 +1,6 @@
 {
   "name": "@ffilip/chan180-utils",
-  "version": "3.4.11",
+  "version": "3.4.17",
   "description": "Lightweight TypeScript utilities with shared types, models, and browser helpers (like fullscreen and DOM tools).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -43,7 +43,7 @@
     "version:major": "npm version major && git push --follow-tags",
     "version:minor": "npm version minor && git push --follow-tags",
     "version:patch": "npm version patch && git push --follow-tags",
-    "manualRelease": "rm -rf dist && npm run build && npm publish --access public && npm info @ffilip/chan180-utils"
+    "manualRelease": "npm run build && npm publish --access public && npm info @ffilip/chan180-utils"
   },
   "files": [
     "dist"
