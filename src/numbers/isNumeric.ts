@@ -1,3 +1,5 @@
+import { NullOrUndefined } from "../types";
+
 /**
  * Configuration options for numeric validation.
  *
@@ -37,14 +39,19 @@ const validTypes = ["number", "string"];
  * ---
  * **Examples:**
  *
+ * ✅ **Null or undefined**
+ * ```ts
+ * isNumeric(null);       // false
+ * isNumeric(undefined);  // false
+ * ```
  * ✅ **Basic usage**
  * ```ts
- * isNumeric("123");           // true
- * isNumeric(123);             // true
- * isNumeric("12.3");          // true
- * isNumeric("-12.3");         // true
- * isNumeric("-.");            // false (invalid number format)
- * isNumeric("12a");           // false (contains letter)
+ * isNumeric("123");      // true
+ * isNumeric(123);        // true
+ * isNumeric("12.3");     // true
+ * isNumeric("-12.3");    // true
+ * isNumeric("-.");       // false (invalid number format)
+ * isNumeric("12a");      // false (contains letter)
  * ```
  *
  * ✅ **Integers only**
@@ -76,7 +83,8 @@ const validTypes = ["number", "string"];
  * ```
  *
  * ---
- * @param {string | number} value - The value to check.
+ * @param {string | number | NullOrUndefined} value - The value to check.
+ *   Supports strings and numbers. Null or undefined values, as well as edge cases like "-." or ".", are considered invalid.
  * @param {Object} [options] - Configuration options for numeric validation.
  * @param {boolean} [options.notNegative=false] - Disallow negative numbers (`-` prefix).
  * @param {boolean} [options.isInteger=false] - Only allow integers (no decimal point).
@@ -84,9 +92,13 @@ const validTypes = ["number", "string"];
  *
  * @returns {boolean} `true` if the value matches the specified numeric criteria, otherwise `false`.
  */
-export function isNumeric(value: string | number, options: IsNumericOptions = {}): boolean {
+export function isNumeric(value: string | number | NullOrUndefined, options: IsNumericOptions = {}): boolean {
   if (!validTypes.includes(typeof value)) {  // Reject values that are not string or number
     return false;
+  }
+
+  if (value == null) {
+    return false; // null or undefined → treat as invalid value
   }
 
   value = value.toString();
