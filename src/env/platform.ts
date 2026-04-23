@@ -84,7 +84,14 @@ export const isSafari = (() => {
 export const isIOS = (() => {
   const ua = navigator.userAgent;
 
-  // iPhone, iPad, iPod or iPadOS (which identifies itself as "Macintosh" with touch support)
-  return /iPhone|iPad|iPod/i.test(ua) ||
-    (ua.includes("Macintosh") && navigator.maxTouchPoints > 1);
+  // iPhone, iPad or iPod
+  const isIPhoneIPadIPod = /iPhone|iPad|iPod/i.test(ua);
+
+  // iPadOS (which identifies itself as "Macintosh" with touch support)
+  const isIPadOS =
+    ua.includes("Macintosh") &&
+    navigator.maxTouchPoints > 1 &&
+    /AppleWebKit/i.test(ua);
+
+  return isIPhoneIPadIPod || isIPadOS;
 })();
